@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+.selectbox {
+  &--open {
+    z-index: 100;
+  }
+  &__holder {
+    position: relative;
+
+    background-color: #fff;
+
+    &--disabled {
+      a {
+        cursor: default;
+      }
+    }
+  }
+  &__toggle {
+    position: absolute;
+    top: 14px;
+    right: 10px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 7px solid #959fa1;
+
+    z-index: 2;
+
+  }
+  &--open &__toggle {
+    border-top: none;
+    border-bottom: 7px solid #959fa1;
+  }
+  &__selector {
+    overflow: hidden;
+    display: block;
+
+    position: relative;
+
+    height: 13px;
+
+    padding: 9px 20px 9px 10px;
+
+    border: 1px solid #d5e3e6;
+    background-color: #fff;
+
+    color: #999;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+
+    border-radius: 4px;
+
+    &:after,
+    &:before {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      width: 15px;
+
+      background-image: linear-gradient(to left, #fff 30%, rgba(255, 255, 255, 0) 100%);
+    }
+    &:before {
+      background: #fff;
+    }
+    &:after {
+      right: 15px;
+    }
+  }
+  &--open &__selector {
+    border-color: #fff;
+
+    box-shadow: 0 1px 3px #999;
+
+    border-radius: 5px 5px 0 0;
+  }
+  &__holder--drop-up &__selector {
+    border-radius: 0 0 5px 5px;
+
+    z-index: 1
+  }
+  &__options {
+    overflow: auto;
+
+    position: absolute;
+    left: 0;
+
+    min-width: 100%;
+
+    box-shadow: 0 1px 3px #999;
+
+    border-radius: 0 0 5px 5px;
+
+    &-list {
+      list-style: none;
+
+      background-color: #fff;
+
+      a {
+        display: block;
+
+        height: 13px;
+
+        padding: 10px;
+
+        color: #555;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+    }
+    &__holder--drop-up &__options {
+      border-radius: 5px 5px 0 0;
+    }
+    &-item {
+      overflow: hidden;
+
+      position: relative;
+
+      width: 100%;
+
+      &:after {
+        content: '';
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+
+        width: 15px;
+
+        background-image: linear-gradient(to left, #fff 30%, rgba(255, 255, 255, 0) 100%);
+      }
+      &:hover {
+        background-color: #b9c6c9;
+
+        &:after {
+          background-image: linear-gradient(to left, #b9c6c9 30%, rgba(185, 198, 201, 0) 100%);
+        }
+        a {
+          color: #fff;
+        }
+      }
+      &--selected {
+        display: none;
+      }
+    }
+  }
+}

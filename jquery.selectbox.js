@@ -8,10 +8,8 @@
  *
  * Date: Tue Jul 09 18:19:36 2014 +0700
  */
-(function ($, undefined) {
-    var PROP_NAME = 'selectbox',
-        FALSE = false,
-        TRUE = true;
+(function ($) {
+    var PROP_NAME = 'selectbox';
 
     /**
      * Selectbox manager.
@@ -57,7 +55,7 @@
          */
         _isOpenSelectbox: function (target) {
             if (!target) {
-                return FALSE;
+                return false;
             }
             var inst = this._getInst(target);
             return inst.isOpen;
@@ -70,7 +68,7 @@
          */
         _isDisabledSelectbox: function (target) {
             if (!target) {
-                return FALSE;
+                return false;
             }
             var inst = this._getInst(target);
             return inst.isDisabled;
@@ -83,18 +81,18 @@
          */
         _attachSelectbox: function (target, settings) {
             if (this._getInst(target)) {
-                return FALSE;
+                return false;
             }
             var $target = $(target),
                 self = this,
                 inst = self._newInst($target),
                 sbHolder, sbSelector, sbToggle, sbOptionsContainer, sbOptions,
-                s = FALSE, optGroup = $target.find("optgroup"), opts = $target.find("option"), olen = opts.length;
+                s = false, optGroup = $target.find("optgroup"), opts = $target.find("option"), olen = opts.length;
 
             $target.attr("sb", inst.uid);
 
             $.extend(inst.settings, self._defaults, settings, $target.data('options'));
-            self._state[inst.uid] = FALSE;
+            self._state[inst.uid] = false;
             $target.hide();
 
             function closeOthers() {
@@ -204,7 +202,7 @@
                     if (that.is(":selected")) {
                         sbSelector.text(that.text());
                         li.addClass(inst.settings.classOptionSelected);
-                        s = TRUE;
+                        s = true;
                     }
                     if (i === olen - 1) {
                         li.addClass("last");
@@ -347,7 +345,7 @@
         _detachSelectbox: function (target) {
             var inst = this._getInst(target);
             if (!inst) {
-                return FALSE;
+                return false;
             }
             $("#sbHolder_" + inst.uid).remove();
             $.data(target, PROP_NAME, null);
@@ -374,7 +372,7 @@
                     .find('li').eq(index).addClass(inst.settings.classOptionSelected);
             }
             value = value.replace(/\'/g, "\\'");
-            $(target).find("option[value='" + value + "']").attr("selected", TRUE);
+            $(target).find("option[value='" + value + "']").attr("selected", true);
             if (inst && onChange) {
                 onChange.apply((inst.input ? inst.input[0] : null), [value, inst]);
             } else if (inst && inst.input) {
@@ -389,10 +387,10 @@
         _enableSelectbox: function (target) {
             var inst = this._getInst(target);
             if (!inst || !inst.isDisabled) {
-                return FALSE;
+                return false;
             }
             $("#sbHolder_" + inst.uid).removeClass(inst.settings.classHolderDisabled);
-            inst.isDisabled = FALSE;
+            inst.isDisabled = false;
             $.data(target, PROP_NAME, inst);
         },
         /**
@@ -403,10 +401,10 @@
         _disableSelectbox: function (target) {
             var inst = this._getInst(target);
             if (!inst || inst.isDisabled) {
-                return FALSE;
+                return false;
             }
             $("#sbHolder_" + inst.uid).addClass(inst.settings.classHolderDisabled);
-            inst.isDisabled = TRUE;
+            inst.isDisabled = true;
             $.data(target, PROP_NAME, inst);
         },
         /**
@@ -419,7 +417,7 @@
         _optionSelectbox: function (target, name, value) {
             var inst = this._getInst(target);
             if (!inst) {
-                return FALSE;
+                return false;
             }
             //TODO check name
             inst[name] = value;
@@ -464,8 +462,8 @@
             }
             inst.settings.effect === "fade" ? el.fadeIn(inst.settings.speed) : el.slideDown(inst.settings.speed);
             holder.addClass(inst.settings.classSelectOpen);
-            this._state[inst.uid] = TRUE;
-            inst.isOpen = TRUE;
+            this._state[inst.uid] = true;
+            inst.isOpen = true;
             if (onOpen) {
                 onOpen.apply((inst.input ? inst.input[0] : null), [inst]);
             }
@@ -486,8 +484,8 @@
             var sbOptions = $("#sbOptions_" + inst.uid);
             inst.settings.effect === "fade" ? sbOptions.fadeOut(inst.settings.speed) : sbOptions.slideUp(inst.settings.speed);
             $("#sbHolder_" + inst.uid).removeClass(inst.settings.classSelectOpen).removeClass(inst.settings.classDropUp);
-            this._state[inst.uid] = FALSE;
-            inst.isOpen = FALSE;
+            this._state[inst.uid] = false;
+            inst.isOpen = false;
             if (onClose) {
                 onClose.apply((inst.input ? inst.input[0] : null), [inst]);
             }
@@ -505,8 +503,8 @@
                 id: id,
                 input: target,
                 uid: Math.floor(Math.random() * 99999999),
-                isOpen: FALSE,
-                isDisabled: FALSE,
+                isOpen: false,
+                isDisabled: false,
                 settings: {}
             };
         },
